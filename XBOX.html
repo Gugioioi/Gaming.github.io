@@ -2,171 +2,162 @@
 <html>
 <head>
  <title>Cards</title>
+ <style type="text/css">
+  *{
+   margin: 0px;
+   padding: 0px;
+  }
+  body{
+   font-family: arial;
+   background-image: url(gamebg.jpg);
+   background-size: cover;
+   background-repeat: no-repeat;
+  }
+  .main{
+   margin: 2%;
+  }
+  .card{
+   width: 20%;
+   display: inline-block;
+   box-shadow: 2px 2px 20px black;
+   border-radius: 5px; 
+   margin: 2%;
+  }
+  .image img{
+   width: 100%;
+   border-top-right-radius: 5px;
+   border-top-left-radius: 5px;
+  }
+  .title{
+   text-align: center;
+   padding: 10px;
+  }
+  h1{
+   font-size: 20px;
+  }
+  .des{
+   padding: 3px;
+   text-align: center;
+   padding-top: 10px;
+   border-bottom-right-radius: 5px;
+   border-bottom-left-radius: 5px;
+  }
+  button{
+   margin-top: 40px;
+   margin-bottom: 10px;
+   background-color: white;
+   border: 1px solid black;
+   border-radius: 5px;
+   padding:10px;
+  }
+  button:hover{
+   background-color: black;
+   color: white;
+   transition: .5s;
+   cursor: pointer;
+  }
+  nav {
+   background-color: #333;
+   overflow: hidden;
+  }
+  nav ul {
+   list-style-type: none;
+   margin: 0;
+   padding: 0;
+  }
+  nav ul li {
+   float: left;
+  }
+  nav ul li a {
+   display: block;
+   color: white;
+   text-align: center;
+   padding: 14px 16px;
+   text-decoration: none;
+  }
+  nav ul li a:hover {
+   background-color: #111;
+  }
+ </style>
 </head>
-
-<style type="text/css">
-
-
-*{
- margin: 0px;
- padding: 0px;
-}
-body{
- font-family: arial;
- background-image: url(gamebg.jpg); /* Replace 'https://example.com/your-background-image.jpg' with the URL of your background image */
- background-size: cover;
- background-repeat: no-repeat;
-}
-.main{
-
- margin: 2%;
-}
-
-.card{
-     width: 20%;
-     display: inline-block;
-     box-shadow: 2px 2px 20px black;
-     border-radius: 5px; 
-     margin: 2%;
-    }
-
-.image img{
-  width: 100%;
-  border-top-right-radius: 5px;
-  border-top-left-radius: 5px;
-  
-
- 
- }
-
-.title{
- 
-  text-align: center;
-  padding: 10px;
-  
- }
-
-h1{
-  font-size: 20px;
- }
-
-.des{
-  padding: 3px;
-  text-align: center;
- 
-  padding-top: 10px;
-        border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-}
-button{
-  margin-top: 40px;
-  margin-bottom: 10px;
-  background-color: white;
-  border: 1px solid black;
-  border-radius: 5px;
-  padding:10px;
-}
-button:hover{
-  background-color: black;
-  color: white;
-  transition: .5s;
-  cursor: pointer;
-}
-
-</style>
 <body>
 
+<nav>
+   <ul class="navbar">
+      <li><a href="index.html" class="active">ARCADE</a></li>
+      <li><a href="XBOX.html">XBOX</a></li>
+      <li><a href="PES 4.html">PES 4</a></li>
+      <li><a href="NINTENDO.html">NINTEDO</a></li>
+      <li><a href="feedback.html">Feedback</a></li>
+  </ul>
+</nav>
+
 <div class="main">
-
  <!--cards -->
-
-<div class="card">
-
-<div class="image">
-   <img src="battlefield.jpg">
-</div>
-<div class="title">
- <h1>
-BattleField</h1>
-</div>
-<div class="des">
- <p>You can Add Desccription Here...</p>
-<button>Read More...</button>
-</div>
-</div>
-<!--cards -->
-
-
-<div class="card">
-
-<div class="image">
-   <img src="coldwar.png">
-</div>
-<div class="title">
- <h1>
-Cold War</h1>
-</div>
-<div class="des">
- <p>You can Add Desccription Here...</p>
-<button>Read More...</button>
-</div>
-</div>
-<!--cards -->
-
-
-
-<!--cards -->
-
-
-<div class="card">
-
-<div class="image">
-   <img src="asphalt8.jpg">
-</div>
-<div class="title">
- <h1>
-Asphalt 8</h1>
-</div>
-<div class="des">
- <p>You can Add Desccription Here...</p>
-<button>Read More...</button>
-</div>
-</div>
-<!--cards -->
-
-
-<div class="card">
-
-<div class="image">
-   <img src="assassin.jpg">
-</div>
-<div class="title">
- <h1>
-Assassin</h1>
-</div>
-<div class="des">
- <p>You can Add Desccription Here...</p>
-<button>Read More...</button>
-</div>
-</div>
-<!--cards -->
-
-<div class="card">
-
-<div class="image">
+ <div class="card">
+  <div class="image">
+   <img src="images (1).jpeg">
+  </div>
+  <div class="title">
+   <h1>Rocket League</h1>
+  </div>
+  <div class="des">
+   <p>You can see Description Here...</p>
+   <a href="rocket-league.html"><button>Read More...</button></a>
+  </div>
+ </div>
+ <!--cards -->
+ <div class="card">
+  <div class="image">
+   <img src="images (2).jpeg">
+  </div>
+  <div class="title">
+   <h1>Gears of War</h1>
+  </div>
+  <div class="des">
+   <p>You can Add Description Here...</p>
+   <button>Read More...</button>
+  </div>
+ </div>
+ <!--cards -->
+ <div class="card">
+  <div class="image">
+   <img src="images(3).jpg">
+  </div>
+  <div class="title">
+   <h1>Roblox</h1>
+  </div>
+  <div class="des">
+   <p>You can Add Description Here...</p>
+   <button>Read More...</button>
+  </div>
+ </div>
+ <!--cards -->
+ <div class="card">
+  <div class="image">
+   <img src="images(4).jpeg">
+  </div>
+  <div class="title">
+   <h1>Fusion Frenzy</h1>
+  </div>
+  <div class="des">
+   <p>You can Add Description Here...</p>
+   <button>Read More...</button>
+  </div>
+ </div>
+ <!--cards -->
+ <div class="card">
+  <div class="image">
    <img src="https://cdn.pixabay.com/photo/2018/01/09/03/49/the-natural-scenery-3070808_1280.jpg">
-</div>
-<div class="title">
- <h1>
-Write title Here</h1>
-</div>
-<div class="des">
- <p>Game <Details></Details></p>
-<button>Read More About Game</button>
-</div>
-</div>
-
-
+  </div>
+  <div class="title">
+   <h1>Write title Here</h1>
+  </div>
+  <div class="des">
+   <p>Game Details</p>
+   <button>Read More About Game</button>
+  </div>
+ </div>
 </div>
 </body>
 </html>
