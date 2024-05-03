@@ -73,6 +73,26 @@
     background-color: #ddd;
     color: black;
 }
+
+/* Star rating styling */
+.rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+}
+
+.rating > span {
+    display: inline-block;
+    position: relative;
+    width: 1.1em;
+}
+
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+    content: "\2605";
+    position: absolute;
+    color: gold;
+}
+
 </style>
 </head>
 <body>
@@ -90,6 +110,15 @@
     <img src="th1.jpeg" alt="Mario Kart 8 Deluxe" class="game-image">
     <div class="game-description">
         <h2 class="game-title">Mario Kart 8 Deluxe</h2>
+        <!-- Star rating -->
+        <div class="rating" id="rating">
+            <span id="star1" onclick="rateGame(1)">&#9734;</span>
+            <span id="star2" onclick="rateGame(2)">&#9734;</span>
+            <span id="star3" onclick="rateGame(3)">&#9734;</span>
+            <span id="star4" onclick="rateGame(4)">&#9734;</span>
+            <span id="star5" onclick="rateGame(5)">&#9734;</span>
+        </div>
+        <!-- End of star rating -->
         <p class="game-summary">Mario Kart 8 Deluxe is a thrilling racing game developed by Nintendo for the Nintendo Switch console. Released in 2017 as an enhanced version of the original Mario Kart 8 for the Wii U, Mario Kart 8 Deluxe offers players the ultimate Mario Kart experience, combining high-speed racing action with colorful characters, vibrant tracks, and addictive multiplayer gameplay.</p>
         <p class="game-summary">At its core, Mario Kart 8 Deluxe follows the classic formula of the Mario Kart series, pitting players against each other in fast-paced races across a variety of imaginative and whimsical tracks inspired by the iconic worlds of the Mario universe. From the lush greens of Yoshi Valley to the neon-lit streets of Rainbow Road, each track is filled with obstacles, shortcuts, and power-ups that keep the action fresh and exciting with every race.</p>
         <p class="game-summary">One of the standout features of Mario Kart 8 Deluxe is its diverse roster of playable characters, including beloved Nintendo icons such as Mario, Luigi, Princess Peach, and Bowser, as well as guest characters like Link from The Legend of Zelda and the Inklings from Splatoon. Each character comes with their own unique kart and special abilities, allowing players to customize their racing experience and find a playstyle that suits them best.</p>
@@ -99,5 +128,33 @@
         <p class="game-summary">Overall, Mario Kart 8 Deluxe is a must-have title for any Nintendo Switch owner, offering endless hours of racing fun and excitement for players of all ages and skill levels. With its addictive gameplay, colorful characters, and vibrant tracks, it's no wonder that Mario Kart remains one of Nintendo's most beloved and enduring franchises, capturing the hearts of fans around the world for generations to come.</p>
     </div>
 </div>
+
+<script>
+function rateGame(rating) {
+    // Reset all stars to default
+    for (let i = 1; i <= 5; i++) {
+        document.getElementById(`star${i}`).innerHTML = '&#9734;';
+    }
+
+    // Fill stars up to the clicked one
+    for (let i = 1; i <= rating; i++) {
+        document.getElementById(`star${i}`).innerHTML = '&#9733;';
+    }
+
+    // Here you can send the rating to your server using AJAX
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'save_rating.php'); // Replace 'save_rating.php' with your actual server endpoint
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({ rating: rating }));
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            console.log('Rating saved successfully!');
+        } else {
+            console.error('Error saving rating.');
+        }
+    };
+}
+</script>
+
 </body>
 </html>
