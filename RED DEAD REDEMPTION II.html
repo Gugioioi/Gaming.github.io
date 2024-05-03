@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PES 4 Game Description</title>
+<title>RED DEAD REDEMPTION II Game Description</title>
 <style>
     body {
     font-family: Arial, sans-serif;
@@ -73,6 +73,26 @@
     background-color: #ddd;
     color: black;
 }
+
+/* Star rating styling */
+.rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+}
+
+.rating > span {
+    display: inline-block;
+    position: relative;
+    width: 1.1em;
+}
+
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+    content: "\2605";
+    position: absolute;
+    color: gold;
+}
+
 </style>
 </head>
 <body>
@@ -90,6 +110,15 @@
     <img src="81t5bLJJ5DL._SL1500_.jpg" alt="RED DEAD REDEMPTION II" class="game-image">
     <div class="game-description">
         <h2 class="game-title">RED DEAD REDEMPTION II</h2>
+        <!-- Star rating -->
+        <div class="rating" id="rating">
+            <span id="star1" onclick="rateGame(1)">&#9734;</span>
+            <span id="star2" onclick="rateGame(2)">&#9734;</span>
+            <span id="star3" onclick="rateGame(3)">&#9734;</span>
+            <span id="star4" onclick="rateGame(4)">&#9734;</span>
+            <span id="star5" onclick="rateGame(5)">&#9734;</span>
+        </div>
+        <!-- End of star rating -->
         <p class="game-summary">Red Dead Redemption II is an epic western-themed action-adventure game developed and published by Rockstar Games. Released in 2018, it serves as a prequel to the critically acclaimed Red Dead Redemption and takes players on an immersive journey through the rugged landscapes of the American frontier at the turn of the 20th century.</p>
         <p class="game-summary">Set in 1899, Red Dead Redemption II follows the story of Arthur Morgan, an outlaw and member of the Van der Linde gang, led by the charismatic and enigmatic Dutch van der Linde. As the age of outlaws comes to an end and the Wild West becomes increasingly civilized, Arthur and the gang find themselves on the run from the law, struggling to survive in a world that is rapidly changing around them.</p>
         <p class="game-summary">One of the most notable aspects of Red Dead Redemption II is its vast and meticulously crafted open world. From the sweeping plains of the Heartlands to the snowy peaks of the Grizzlies, the game's environment is rich with detail, teeming with wildlife, and alive with the hustle and bustle of frontier life. Players can explore a variety of landscapes, encounter diverse characters, and engage in a wide range of activities, from hunting and fishing to robbing trains and engaging in shootouts with rival gangs.</p>
@@ -99,5 +128,23 @@
         <p class="game-summary">Overall, Red Dead Redemption II is a masterful work of game design and storytelling, offering players an unforgettable journey through the untamed wilderness of the American frontier. With its richly realized world, compelling characters, and immersive gameplay experience, it stands as a true testament to the power of interactive storytelling, captivating players and critics alike with its epic scope and ambition.        </p>
     </div>
 </div>
+
+<!-- JavaScript for star rating -->
+<script>
+function rateGame(rating) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://example.com/rate', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({ rating: rating }));
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            console.log('Rating saved successfully!');
+        } else {
+            console.error('Error saving rating.');
+        }
+    };
+}
+</script>
+
 </body>
 </html>
