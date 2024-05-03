@@ -73,6 +73,26 @@
     background-color: #ddd;
     color: black;
 }
+
+/* Star rating styling */
+.rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+}
+
+.rating > span {
+    display: inline-block;
+    position: relative;
+    width: 1.1em;
+}
+
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+    content: "\2605";
+    position: absolute;
+    color: gold;
+}
+
 </style>
 </head>
 <body>
@@ -90,6 +110,15 @@
     <img src="Pikmin 4.jpeg" alt="Pikmin 4" class="game-image">
     <div class="game-description">
         <h2 class="game-title">Pikmin 4</h2>
+        <!-- Star rating -->
+        <div class="rating" id="rating">
+            <span id="star1" onclick="rateGame(1)">&#9734;</span>
+            <span id="star2" onclick="rateGame(2)">&#9734;</span>
+            <span id="star3" onclick="rateGame(3)">&#9734;</span>
+            <span id="star4" onclick="rateGame(4)">&#9734;</span>
+            <span id="star5" onclick="rateGame(5)">&#9734;</span>
+        </div>
+        <!-- End of star rating -->
         <p class="game-summary">Pikmin 4 is an eagerly anticipated real-time strategy game developed by Nintendo and part of the beloved Pikmin series. While information about Pikmin 4 has been sparse, fans eagerly await its release, anticipating another charming and innovative addition to the franchise.</p>
         <p class="game-summary">Set in a whimsical world where tiny plant-like creatures called Pikmin inhabit lush environments, Pikmin 4 is expected to continue the series' tradition of blending strategic gameplay with exploration and puzzle-solving. Players control the series' protagonist, Captain Olimar, as he commands groups of Pikmin to navigate various obstacles, collect resources, and battle enemies in order to complete objectives and save his home planet, Hocotate.</p>
         <p class="game-summary">One of the hallmarks of the Pikmin series is its unique gameplay mechanics, which revolve around commanding and utilizing different types of Pikmin with specialized abilities. Red Pikmin are immune to fire, Blue Pikmin can traverse water, Yellow Pikmin can conduct electricity, and so on. Players must strategically choose the right Pikmin for the task at hand, whether it's defeating enemies, overcoming environmental hazards, or solving puzzles.</p>
@@ -97,5 +126,33 @@
         <p class="game-summary">While specific details about Pikmin 4 remain scarce, fans eagerly await any news or announcements from Nintendo regarding the game's development and release. With its unique blend of strategy, exploration, and charm, Pikmin 4 is poised to be another standout title in the beloved Pikmin series, offering players a delightful and memorable gaming experience that showcases the creativity and innovation synonymous with Nintendo's game design.</p>
     </div>
 </div>
+
+<script>
+function rateGame(rating) {
+    // Reset all stars to default
+    for (let i = 1; i <= 5; i++) {
+        document.getElementById(`star${i}`).innerHTML = '&#9734;';
+    }
+
+    // Fill stars up to the clicked one
+    for (let i = 1; i <= rating; i++) {
+        document.getElementById(`star${i}`).innerHTML = '&#9733;';
+    }
+
+    // Here you can send the rating to your server using AJAX
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'save_rating.php'); // Replace 'save_rating.php' with your actual server endpoint
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({ rating: rating }));
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            console.log('Rating saved successfully!');
+        } else {
+            console.error('Error saving rating.');
+        }
+    };
+}
+</script>
+
 </body>
 </html>
