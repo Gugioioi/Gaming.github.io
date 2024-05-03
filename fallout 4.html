@@ -73,6 +73,26 @@
     background-color: #ddd;
     color: black;
 }
+
+/* Star rating styling */
+.rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+}
+
+.rating > span {
+    display: inline-block;
+    position: relative;
+    width: 1.1em;
+}
+
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+    content: "\2605";
+    position: absolute;
+    color: gold;
+}
+
 </style>
 </head>
 <body>
@@ -90,6 +110,15 @@
     <img src="fallout 4 .jpg" alt="Fallout 4" class="game-image">
     <div class="game-description">
         <h2 class="game-title">Fallout 4</h2>
+        <!-- Star rating -->
+        <div class="rating" id="rating">
+            <span id="star1" onclick="rateGame(1)">&#9734;</span>
+            <span id="star2" onclick="rateGame(2)">&#9734;</span>
+            <span id="star3" onclick="rateGame(3)">&#9734;</span>
+            <span id="star4" onclick="rateGame(4)">&#9734;</span>
+            <span id="star5" onclick="rateGame(5)">&#9734;</span>
+        </div>
+        <!-- End of star rating -->
         <p class="game-summary">Fallout 4 is an action role-playing game developed by Bethesda Game Studios and published by Bethesda Softworks. It is the fourth main installment in the Fallout series and was released in November 2015 for multiple platforms, including PlayStation 4, Xbox One, and Microsoft Windows.</p>
         <p class="game-summary">Set in a post-apocalyptic open world known as the Commonwealth, Fallout 4 takes place in the aftermath of a nuclear war. Players assume the role of the Sole Survivor, the only known survivor of Vault 111, who emerges from cryogenic stasis to find their spouse murdered and their infant son kidnapped. As the Sole Survivor ventures into the wasteland in search of their missing child, they encounter various factions, creatures, and challenges along the way.</p>
         <p class="game-summary">Fallout 4 features a vast open world filled with dynamic environments, dilapidated cities, and irradiated landscapes. Players can explore the Commonwealth at their own pace, encountering numerous locations, characters, and quests. The game also introduces a revamped crafting system, allowing players to scavenge materials and build custom weapons, armor, and settlements.</p>
@@ -97,5 +126,33 @@
         <p class="game-summary">In addition to its main questline, Fallout 4 offers a wealth of side quests, activities, and exploration opportunities. From engaging in intense firefights with raiders and mutants to uncovering hidden treasures and uncovering the secrets of the wasteland, there's always something new to discover in Fallout 4.</p>
     </div>
 </div>
+
+<script>
+function rateGame(rating) {
+    // Reset all stars to default
+    for (let i = 1; i <= 5; i++) {
+        document.getElementById(`star${i}`).innerHTML = '&#9734;';
+    }
+
+    // Fill stars up to the clicked one
+    for (let i = 1; i <= rating; i++) {
+        document.getElementById(`star${i}`).innerHTML = '&#9733;';
+    }
+
+    // Here you can send the rating to your server using AJAX
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'save_rating.php'); // Replace 'save_rating.php' with your actual server endpoint
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({ rating: rating }));
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            console.log('Rating saved successfully!');
+        } else {
+            console.error('Error saving rating.');
+        }
+    };
+}
+</script>
+
 </body>
 </html>
