@@ -73,6 +73,26 @@
     background-color: #ddd;
     color: black;
 }
+
+/* Star rating styling */
+.rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+}
+
+.rating > span {
+    display: inline-block;
+    position: relative;
+    width: 1.1em;
+}
+
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+    content: "\2605";
+    position: absolute;
+    color: gold;
+}
+
 </style>
 </head>
 <body>
@@ -90,6 +110,15 @@
     <img src="Ghost of Tsushima Director's Cut.jpg" alt="Ghost of Tsushima Director's Cut" class="game-image">
     <div class="game-description">
         <h2 class="game-title">Ghost of Tsushima Director's Cut</h2>
+        <!-- Star rating -->
+        <div class="rating" id="rating">
+            <span id="star1" onclick="rateGame(1)">&#9734;</span>
+            <span id="star2" onclick="rateGame(2)">&#9734;</span>
+            <span id="star3" onclick="rateGame(3)">&#9734;</span>
+            <span id="star4" onclick="rateGame(4)">&#9734;</span>
+            <span id="star5" onclick="rateGame(5)">&#9734;</span>
+        </div>
+        <!-- End of star rating -->
         <p class="game-summary">Ghost of Tsushima Director's Cut is an expansive action-adventure game developed by Sucker Punch Productions and published by Sony Interactive Entertainment. Released in 2021 as an enhanced version of the original game, the Director's Cut offers players an immersive journey through the picturesque landscapes of feudal Japan, blending historical authenticity with captivating gameplay and storytelling.</p>
         <p class="game-summary">Set on the island of Tsushima during the Mongol invasion of Japan in 1274, Ghost of Tsushima follows the story of Jin Sakai, a samurai warrior determined to defend his homeland from the ruthless invaders. As Jin embarks on a perilous quest to thwart the Mongol forces and liberate Tsushima, players must navigate the sprawling open-world environment, engaging in epic battles, stealthy infiltration missions, and heartfelt side quests along the way.</p>
         <p class="game-summary">One of the defining features of Ghost of Tsushima Director's Cut is its breathtakingly beautiful world design. Inspired by the natural beauty of Tsushima Island, the game's environments are meticulously crafted with stunning attention to detail, from lush forests and rolling hills to tranquil bamboo groves and sweeping vistas. Every corner of the island is filled with hidden secrets, ancient temples, and breathtaking scenery, inviting players to explore and discover the rich history and culture of feudal Japan.</p>
@@ -99,5 +128,33 @@
         <p class="game-summary">Overall, Ghost of Tsushima Director's Cut is a triumph of game design and storytelling, offering players an unforgettable journey through the heart of feudal Japan. With its breathtaking visuals, engaging gameplay, and heartfelt storytelling, it stands as a testament to the power of interactive entertainment, captivating players with its immersive world and compelling narrative.</p>
     </div>
 </div>
+
+<script>
+function rateGame(rating) {
+    // Reset all stars to default
+    for (let i = 1; i <= 5; i++) {
+        document.getElementById(`star${i}`).innerHTML = '&#9734;';
+    }
+
+    // Fill stars up to the clicked one
+    for (let i = 1; i <= rating; i++) {
+        document.getElementById(`star${i}`).innerHTML = '&#9733;';
+    }
+
+    // Here you can send the rating to your server using AJAX
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'save_rating.php'); // Replace 'save_rating.php' with your actual server endpoint
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({ rating: rating }));
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            console.log('Rating saved successfully!');
+        } else {
+            console.error('Error saving rating.');
+        }
+    };
+}
+</script>
+
 </body>
 </html>
