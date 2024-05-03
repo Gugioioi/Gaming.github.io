@@ -73,6 +73,26 @@
     background-color: #ddd;
     color: black;
 }
+
+/* Star rating styling */
+.rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+}
+
+.rating > span {
+    display: inline-block;
+    position: relative;
+    width: 1.1em;
+}
+
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+    content: "\2605";
+    position: absolute;
+    color: gold;
+}
+
 </style>
 </head>
 <body>
@@ -90,8 +110,51 @@
     <img src="images(4).jpeg" alt="Fusion Frenzy" class="game-image">
     <div class="game-description">
         <h2 class="game-title">Fusion Frenzy</h2>
-        <p class="game-summary">Fusion Frenzy is a party video game developed by Blitz Games and published by Microsoft Game Studios for the original Xbox console. The game features a collection of 45 minigames set in a futuristic world where contestants compete in various challenges to become the ultimate champion of the Fusion Frenzy tournament. Each minigame offers a unique gameplay experience, ranging from racing and platforming to puzzle-solving and trivia quizzes. Fusion Frenzy supports multiplayer gameplay for up to four players, making it a perfect choice for social gatherings and gaming parties.</p>
+        <!-- Star rating -->
+        <div class="rating" id="rating">
+            <span id="star1" onclick="rateGame(1)">&#9734;</span>
+            <span id="star2" onclick="rateGame(2)">&#9734;</span>
+            <span id="star3" onclick="rateGame(3)">&#9734;</span>
+            <span id="star4" onclick="rateGame(4)">&#9734;</span>
+            <span id="star5" onclick="rateGame(5)">&#9734;</span>
+        </div>
+        <!-- End of star rating -->
+        <p class="game-summary">Fusion Frenzy is a multiplayer party game developed by Blitz Games and published by Microsoft Game Studios. Originally released for the Xbox in 2001, Fusion Frenzy quickly became a staple of social gaming gatherings, offering a fast-paced and addictive experience that appealed to players of all ages.</p>
+        <p class="game-summary">Set in a futuristic world where contestants compete in a series of mini-games to become the ultimate champion of the Fusion Frenzy tournament, the game features a diverse cast of characters, each with their own unique abilities and personalities. Players must navigate a variety of dynamic and unpredictable challenges, from racing through obstacle courses to battling opponents in frenetic arena-based competitions.</p>
+        <p class="game-summary">One of the defining features of Fusion Frenzy is its fast-paced and accessible gameplay, which makes it easy for players of all skill levels to pick up and enjoy. The game's intuitive controls and simple mechanics allow for quick and exciting matches that keep players coming back for more, whether they're playing with friends in local multiplayer or competing against AI opponents in single-player mode.</p>
+        <p class="game-summary">In addition to its engaging gameplay, Fusion Frenzy boasts a vibrant and colorful art style that reflects its futuristic setting. From sleek, neon-lit environments to imaginative character designs, the game's visuals are both visually appealing and thematically consistent, creating a cohesive and immersive world that draws players in from the moment they start playing.</p>
+        <p class="game-summary">Another highlight of Fusion Frenzy is its robust multiplayer mode, which allows up to four players to compete against each other in a variety of mini-games and challenges. Whether it's teaming up to conquer cooperative objectives or battling it out in competitive matches, the game offers a wealth of options for players to enjoy together, fostering friendly competition and memorable moments that keep players coming back for more.</p>
+        <p class="game-summary">Overall, Fusion Frenzy is a timeless classic that continues to captivate players with its addictive gameplay, vibrant visuals, and lively multiplayer experience. With its accessible mechanics and diverse range of mini-games, it remains a beloved party game that has stood the test of time, bringing joy and excitement to countless gaming gatherings and social events.</p>
     </div>
 </div>
+
+<script>
+    function rateGame(rating) {
+        // Reset all stars to default
+        for (let i = 1; i <= 5; i++) {
+            document.getElementById(`star${i}`).innerHTML = '&#9734;';
+        }
+    
+        // Fill stars up to the clicked one
+        for (let i = 1; i <= rating; i++) {
+            document.getElementById(`star${i}`).innerHTML = '&#9733;';
+        }
+    
+        // Here you can send the rating to your server using AJAX
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'save_rating.php'); // Replace 'save_rating.php' with your actual server endpoint
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify({ rating: rating }));
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                console.log('Rating saved successfully!');
+            } else {
+                console.error('Error saving rating.');
+            }
+        };
+    }
+    </script>
+    
 </body>
 </html>
+
